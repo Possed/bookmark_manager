@@ -1,10 +1,15 @@
 require 'sinatra/base'
+require 'sinatra/flash'
 require './lib/bookmark'
 require 'uri'
 
+
 class Bookmark_manager < Sinatra::Base
+  enable :sessions
+  register Sinatra::Flash
 
   get '/' do
+    flash[:error] = nil
     erb(:index)
   end
 
@@ -22,13 +27,9 @@ class Bookmark_manager < Sinatra::Base
     if url =~ /\A#{URI::regexp}\z/
       Bookmark.add(params[:new_bookmark])
     else
-      redirect('/error')
+      flash[:error] = "Error! Wrong URL"
     end
-    redirect('/')
-  end
-
-  get '/error' do
-    erb :error
+    redirect('/add')
   end
 
   run! if app_file == $0

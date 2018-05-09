@@ -1,5 +1,14 @@
+<div id='flash' class='error'>
+  <a class="close" data-dismiss="alert">&#215;</a>
+  <%=flash[:error] %>
+</div>
+
 <p>Enter bookmark url:</p>
 <form action = '/save' method = 'post'>
   <input type = 'text' name = 'new_bookmark'>
   <input type = 'submit' value = 'Add'>
+</form>
+
+<form action = '/' method = 'get'>
+  <input type = 'submit' value = 'Homepage'>
 </form>
