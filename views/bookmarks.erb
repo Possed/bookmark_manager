@@ -1,2 +1,5 @@
-http://makersacademy.com
-http://google.com
+<ul>
+  <% @bookmarks.each do |bookmark| %>
+    <li><%= bookmark %></li>
+  <% end %>
+</ul>
