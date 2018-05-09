@@ -1,8 +1,12 @@
+require 'pg'
+
 class Bookmark
   def self.all
-    [
-      'http://makersacademy.com',
-      'http://google.com'
-    ]
+
+    begin
+      con = PG.connect :dbname => 'bookmark_manager', :user => 'rox'
+      rs = con.exec "SELECT * FROM bookmarks"
+    end
+    rs
   end
 end

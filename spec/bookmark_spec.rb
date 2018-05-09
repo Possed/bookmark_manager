@@ -5,8 +5,7 @@ describe Bookmark do
     it 'returns all bookmarks' do
       bookmarks = Bookmark.all
 
-      expect(bookmarks).to include('http://makersacademy.com')
-      expect(bookmarks).to include('http://google.com')
+      expect(bookmarks).to be_an_instance_of(PG::Result)
     end
   end
 end
