@@ -4,11 +4,12 @@ feature 'Add bookmarks' do
     click_button 'Add bookmark'
     expect(page).to have_content 'Enter bookmark url:'
   end
-  xscenario 'A user can see the added bookmark in the list' do
+  scenario 'A user can see the added bookmark in the list' do
     visit '/'
     click_button 'Add bookmark'
     fill_in 'new_bookmark', :with => 'http://newurl.com'
     click_button 'Add'
+    click_button 'View bookmarks'
     expect(page).to have_content 'http://newurl.com'
   end
 end
