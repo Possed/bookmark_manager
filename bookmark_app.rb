@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require './lib/bookmark'
+require 'uri'
 
 class Bookmark_manager < Sinatra::Base
 
@@ -17,8 +18,17 @@ class Bookmark_manager < Sinatra::Base
   end
 
   post '/save' do
-    Bookmark.add(params[:new_bookmark])
+    url = params[:new_bookmark]
+    if url =~ /\A#{URI::regexp}\z/
+      Bookmark.add(params[:new_bookmark])
+    else
+      redirect('/error')
+    end
     redirect('/')
+  end
+
+  get '/error' do
+    erb :error
   end
 
   run! if app_file == $0
