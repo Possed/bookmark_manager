@@ -8,7 +8,7 @@ class Bookmark
     @url = url
     @title = title
   end
-  
+
   def self.all
     ENV['db'] = 'bookmark_manager' if (ENV['db'] == nil)
     con = PG.connect :dbname => ENV['db'], :user => ENV['user']
@@ -22,6 +22,12 @@ class Bookmark
     con = PG.connect :dbname => ENV['db'], :user => ENV['user']
     rs = con.exec "INSERT INTO bookmarks (url, title) VALUES('#{url}', '#{title}')"
     self.valid? ? rs : flash[:error] = "Error! Wrong URL"
+  end
+
+  def self.delete(title)
+    ENV['db'] = 'bookmark_manager' if (ENV['db'] == nil)
+    con = PG.connect :dbname => ENV['db'], :user => ENV['user']
+    rs = con.exec "DELETE FROM bookmarks WHERE title = '#{title}'"
   end
 
   def self.valid?
