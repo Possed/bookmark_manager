@@ -24,11 +24,12 @@ class Bookmark_manager < Sinatra::Base
 
   post '/save' do
     url = params[:new_bookmark]
-    if url =~ /\A#{URI::regexp}\z/
-      Bookmark.add(params[:new_bookmark])
-    else
-      flash[:error] = "Error! Wrong URL"
-    end
+    Bookmark.add(url)
+    # if url =~ /\A#{URI::regexp}\z/
+    #   Bookmark.add(params[:new_bookmark])
+    # else
+    #   flash[:error] = "Error! Wrong URL"
+    # end
     redirect('/add')
   end
 
