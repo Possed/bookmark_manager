@@ -8,9 +8,10 @@ feature 'Add bookmarks' do
     visit '/'
     click_button 'Add bookmark'
     fill_in 'new_bookmark', :with => 'http://newurl.com'
+    fill_in 'new_title', :with => 'newurl'
     click_button 'Add'
     click_button 'Homepage'
     click_button 'View bookmarks'
-    expect(page).to have_content 'http://newurl.com'
+    expect(page).to have_content 'newurl'
   end
 end

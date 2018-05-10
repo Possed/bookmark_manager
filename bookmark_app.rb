@@ -24,7 +24,8 @@ class Bookmark_manager < Sinatra::Base
 
   post '/save' do
     url = params[:new_bookmark]
-    Bookmark.add(url)
+    title = params[:new_title]
+    Bookmark.add(url, title)
     # if url =~ /\A#{URI::regexp}\z/
     #   Bookmark.add(params[:new_bookmark])
     # else
